@@ -85,22 +85,46 @@ public class Solution {
     // return head.next;
 
     //use priority queue
-    var pq = new PriorityQueue<ListNode, int>();
+    var pq = new PriorityQueue<ListNode, int>(); 
+    // Create a priority queue (min-heap) that stores ListNode objects with associated integer values.
 
-    for(int i = 0; i < lists.Length; i++){
-        if(lists[i] != null) pq.Enqueue(lists[i], lists[i].val);
+    for (int i = 0; i < lists.Length; i++) {
+        if (lists[i] != null)
+            pq.Enqueue(lists[i], lists[i].val); 
+    // Enqueue non-null ListNode objects from the 'lists' array into the priority queue with their respective values.
+    // pq: [(1 -> 4 -> 5), (1 -> 3 -> 4), (2 -> 6)]
+    // or pq: [1,1,2]
+    // since the priority queue (pq) in this context does not contain the rest of the linked lists themselves. 
+    // It only contains individual nodes from the linked lists, specifically the nodes that are currently being considered for merging.
+    // each node stored in the priority queue represents the next node to be merged from 
+    // one of the linked lists. When a node is dequeued from the priority queue, 
+    // its corresponding linked list's progress advances to the next node (if available), 
+    // and that next node is enqueued back into the priority queue for future consideration.
     }
-    ListNode prehead = new();
-    ListNode pointer = prehead;
-    while(pq.Count > 0){
-        ListNode newNode = pq.Dequeue();
-        if(newNode.next != null){
-            pq.Enqueue(newNode.next, newNode.next.val);
+
+    ListNode prehead = new ListNode(); 
+    // Create a new ListNode called 'prehead' that will serve as a placeholder for the final merged list.
+    ListNode pointer = prehead; 
+    // Create a pointer 'pointer' initially pointing to 'prehead'.
+
+    while (pq.Count > 0) {
+        ListNode newNode = pq.Dequeue(); 
+        // Dequeue the ListNode with the smallest value from the priority queue.
+
+        if (newNode.next != null) {
+            pq.Enqueue(newNode.next, newNode.next.val); 
+            // If the dequeued ListNode has a next node, enqueue the next node with its value.
         }
+
+        // Create a new ListNode with the value of the dequeued ListNode, and set its next pointer to null.
         pointer.next = new ListNode(newNode.val, null);
-        pointer = pointer.next;
+        
+        pointer = pointer.next; 
+        // Move the 'pointer' to the newly created node.
     }
-    return prehead.next;
+
+    return prehead.next; 
+    // Return the merged list starting from the node after 'prehead', which excludes the initial placeholder.
 
 
 

@@ -5,8 +5,6 @@
  */
 
 // @lc code=start
-
-
 public class Solution {
     public IList<IList<int>> ThreeSum(int[] nums) {
         // Create a list to store the resulting triplets.
@@ -45,8 +43,7 @@ public class Solution {
                 else {
                     res.Add(new List<int> { nums[i], nums[left], nums[right] });
 
-                    // Move the left and right pointer to the next distinct element.
-                    // also skip duplicates  
+                    // Move the left pointer to the next distinct element.
 
                     while (left < right && nums[left] == nums[left + 1]) {
                         left++;
